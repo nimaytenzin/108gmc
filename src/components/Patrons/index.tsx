@@ -3,19 +3,19 @@ import { MapPin, X, User } from 'lucide-react';
 import StupaCard from './StupaCard';
 import type { Stupa } from '../../types/stupa';
 
-interface ProcessionMapProps {
+interface PatronsProps {
   stupas: Stupa[];
   loading: boolean;
   selectedId: number | null;
   onSelect: (id: number | null) => void;
 }
 
-export default function ProcessionMap({
+export default function Patrons({
   stupas,
   loading,
   selectedId,
   onSelect,
-}: ProcessionMapProps) {
+}: PatronsProps) {
   const selectedStupa = selectedId
     ? stupas.find((stupa) => stupa.id === selectedId) ?? null
     : null;

@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { X, User, HeartHandshake } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import chortenLocations from '../../data/chortenLocations';
-import type { MeritPartner, Stupa } from '../../types/stupa';
+import type { Stupa } from '../../types/stupa';
 
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -114,39 +114,11 @@ interface ChortenMapProps {
   variant?: 'embedded' | 'fullscreen';
 }
 
-const MOCK_DONORS: MeritPartner[] = [
-  {
-    name: 'Pema & Family',
-    location: 'Thimphu, Bhutan',
-    dedication: 'For long life, health, and harmony for all beings.',
-    type: 'lead',
-  },
-  {
-    name: 'Dorji Trading Group',
-    location: 'Gelephu, Bhutan',
-    dedication: 'In gratitude to His Majesty and for collective merit.',
-    type: 'partner',
-  },
-  {
-    name: 'Tshering Wangmo',
-    location: 'Paro, Bhutan',
-    dedication: 'Dedicated to parents and teachers.',
-    type: 'partner',
-  },
-  {
-    name: 'Kinga Dorji',
-    location: 'Samtse, Bhutan',
-    dedication: 'May this offering support peace and prosperity.',
-    type: 'partner',
-  },
-];
-
-function getMockDonorsForChorten(chortenId: number): MeritPartner[] {
-  return MOCK_DONORS.map((donor, idx) => ({
-    ...donor,
-    name: `${donor.name} · C${String((chortenId + idx) % 108 || 108).padStart(3, '0')}`,
-  }));
-}
+const STATUS_LABEL: Record<string, string> = {
+  funded: 'Sponsorship Fulfilled',
+  partial: 'Open for Merit',
+  available: 'Awaiting a Sponsor',
+};
 
 export default function ChortenMap({
   stupas,
@@ -157,12 +129,7 @@ export default function ChortenMap({
   const stupaDataMap = new Map(stupas.map((s) => [s.id, { status: s.status, funding: s.funding_percentage }]));
   const [basemap, setBasemap] = useState<'carto' | 'google-satellite'>('carto');
   const selectedStupa = selectedId ? stupas.find((s) => s.id === selectedId) ?? null : null;
-  const donorDetails =
-    selectedStupa && selectedStupa.merit_partners.length > 0
-      ? selectedStupa.merit_partners
-      : selectedId
-        ? getMockDonorsForChorten(selectedId)
-        : [];
+  const partners = selectedStupa?.merit_partners ?? [];
 
   const polylinePoints = chortenLocations
     .slice()
@@ -249,38 +216,70 @@ export default function ChortenMap({
             <p className="font-display text-xs uppercase tracking-widest text-bronze mb-1">
               Status
             </p>
-            <p className="font-body text-burgundy text-sm">
-              {selectedStupa?.status?.toUpperCase() ?? 'AVAILABLE'} · Funding{' '}
-              {selectedStupa?.funding_percentage ?? 0}%
+            <p className="font-display text-sm text-burgundy font-bold uppercase tracking-wide">
+              {STATUS_LABEL[selectedStupa?.status ?? 'available']}
             </p>
+            {selectedStupa && selectedStupa.status !== 'available' && (
+              <p className="font-body text-xs text-bronze mt-0.5">
+                {selectedStupa.funding_percentage}% funded
+              </p>
+            )}
           </div>
 
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-            <p className="font-display text-xs uppercase tracking-widest text-bronze">
-              Donors (Mock)
-            </p>
-            {donorDetails.map((donor, idx) => (
-              <article key={`${donor.name}-${idx}`} className="border border-burgundy/10 p-3">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-burgundy/10 text-burgundy flex items-center justify-center">
-                    {donor.type === 'lead' ? (
-                      <HeartHandshake size={14} />
-                    ) : (
-                      <User size={14} />
-                    )}
-                  </div>
-                  <div>
-                    <p className="font-display text-xs uppercase tracking-wider text-burgundy">
-                      {donor.name}
-                    </p>
-                    <p className="font-body text-xs text-bronze">{donor.location}</p>
-                    <p className="font-body text-sm text-burgundy/80 italic mt-2">
-                      "{donor.dedication}"
-                    </p>
-                  </div>
+            {selectedStupa?.status === 'available' ? (
+              <div className="flex flex-col items-center justify-center py-10 text-center px-4">
+                <div className="w-12 h-12 border border-dashed border-bronze/30 flex items-center justify-center mb-4">
+                  <HeartHandshake size={20} className="text-bronze/40" strokeWidth={1} />
                 </div>
-              </article>
-            ))}
+                <p className="font-display text-sm text-burgundy uppercase tracking-wide mb-1">
+                  Awaiting a Patron
+                </p>
+                <p className="font-body text-sm text-bronze italic leading-relaxed mb-5">
+                  This Jangchub Chorten has no sponsor yet. Be the first to dedicate it and anchor your name along the Mao Chu River.
+                </p>
+                <a
+                  href="mailto:108@gmc.bt?subject=Jangchub Chorten Sponsorship Inquiry"
+                  className="w-full bg-burgundy text-gold font-display text-xs tracking-widest uppercase py-3 text-center hover:bg-burgundy/90 transition-colors"
+                >
+                  Sponsor this Jangchub Chorten
+                </a>
+              </div>
+            ) : partners.length === 0 ? (
+              <p className="font-body text-sm italic text-bronze px-1 pt-2">
+                No partners recorded yet.
+              </p>
+            ) : (
+              <>
+                <p className="font-display text-xs uppercase tracking-widest text-bronze">
+                  Merit Partners
+                </p>
+                {partners.map((partner, idx) => (
+                  <article key={`${partner.name}-${idx}`} className="border border-burgundy/10 p-3">
+                    <div className="flex items-start gap-3">
+                      <div className={`w-8 h-8 flex items-center justify-center flex-shrink-0 ${idx === 0 ? 'bg-burgundy text-gold' : 'bg-burgundy/10 text-bronze'}`}>
+                        {partner.type === 'lead' ? (
+                          <HeartHandshake size={14} />
+                        ) : (
+                          <User size={14} />
+                        )}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-display text-xs uppercase tracking-wider text-burgundy">
+                          {partner.name}
+                        </p>
+                        <p className="font-body text-xs text-bronze mt-0.5">
+                          {partner.location} · {partner.type === 'lead' ? 'Lead Sponsor' : 'Merit Partner'}
+                        </p>
+                        <p className="font-body text-sm text-burgundy/70 italic mt-2 leading-relaxed">
+                          "{partner.dedication}"
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </>
+            )}
           </div>
         </aside>
       )}

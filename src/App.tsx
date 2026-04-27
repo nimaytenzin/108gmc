@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
 import SummaryCards from './components/SummaryCards';
-import ProcessionMap from './components/ProcessionMap';
+import Patrons from './components/Patrons';
 import ChortenMap from './components/ChortenMap';
 import Footer from './components/Footer';
 import { mockStupas } from './data/mockStupas';
@@ -28,7 +28,7 @@ export default function App() {
                 <SummaryCards stupas={stupas} loading={loading} />
 
                 <section className="bg-white border border-burgundy/10 overflow-hidden">
-                  <ProcessionMap
+                  <Patrons
                     stupas={stupas}
                     loading={loading}
                     selectedId={selectedStupaId}
@@ -48,7 +48,7 @@ export default function App() {
             <main className="pt-20">
               <div className="max-w-screen-2xl mx-auto px-4 md:px-8 py-8">
                 <section className="bg-white border border-burgundy/10 overflow-hidden">
-                  <ProcessionMap
+                  <Patrons
                     stupas={stupas}
                     loading={loading}
                     selectedId={selectedStupaId}
