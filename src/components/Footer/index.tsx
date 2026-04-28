@@ -89,10 +89,10 @@ export default function Footer() {
                     Phone
                   </p>
                   <a
-                    href="tel:+97577117708"
+                    href="tel:+97517133171"
                     className="font-display text-lg font-bold text-gold hover:text-gold/80 transition-colors duration-108 tracking-wide"
                   >
-                    +975 77117708
+                    +975 17133171
                   </a>
                 </div>
               </div>

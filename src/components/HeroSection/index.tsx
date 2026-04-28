@@ -28,7 +28,7 @@ const PROJECT_STATS = [
   { value: '108', label: 'Jangchub Chortens' },
   { value: '15m', label: 'Height Each' },
   { value: '108m', label: 'Spacing' },
-  { value: '1.62km', label: 'Total Line' },
+  { value: '12km', label: 'Total Line' },
 ];
 
 const READINESS = [

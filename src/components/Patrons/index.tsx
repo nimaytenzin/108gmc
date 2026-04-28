@@ -45,7 +45,7 @@ export default function Patrons({
             The 108 Landmarks of Merit
           </h2>
           <p className="font-body text-bronze mt-1 text-base">
-            108 Jangchub Chortens · 108m apart · 1.62km total · Select a unit to view sponsors
+            108 Jangchub Chortens · 108m apart · 12km total · Select a unit to view sponsors
           </p>
         </div>
         <Legend />
