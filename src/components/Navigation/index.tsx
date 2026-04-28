@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Home, Map, Globe } from 'lucide-react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const views = [
   { to: '/', icon: Home, label: 'Home' },
@@ -8,13 +8,7 @@ const views = [
   { to: '/map', icon: Globe, label: 'Map View' },
 ];
 
-interface NavigationProps {
-  onSponsor?: () => void;
-}
-
-export default function Navigation({ onSponsor }: NavigationProps) {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
+export default function Navigation() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[1000]">
@@ -71,12 +65,12 @@ export default function Navigation({ onSponsor }: NavigationProps) {
         </div>
 
         {/* CTA */}
-        <button
-          onClick={onSponsor}
+        <Link
+          to="/sponsor"
           className="bg-gold text-burgundy px-5 py-2.5 font-display text-xs tracking-widest uppercase hover:bg-gold/90 transition-all duration-108"
         >
           Sponsor a Jangchub Chorten
-        </button>
+        </Link>
       </div>
     </nav>
   );

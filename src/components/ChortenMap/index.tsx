@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
+import { Link } from 'react-router-dom';
 import { X, User, HeartHandshake } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import chortenLocations from '../../data/chortenLocations';
@@ -111,7 +112,6 @@ interface ChortenMapProps {
   stupas: Stupa[];
   selectedId: number | null;
   onSelect: (id: number | null) => void;
-  onSponsor?: () => void;
   variant?: 'embedded' | 'fullscreen';
 }
 
@@ -125,7 +125,6 @@ export default function ChortenMap({
   stupas,
   selectedId,
   onSelect,
-  onSponsor,
   variant = 'embedded',
 }: ChortenMapProps) {
   const stupaDataMap = new Map(stupas.map((s) => [s.id, { status: s.status, funding: s.funding_percentage }]));
@@ -240,12 +239,12 @@ export default function ChortenMap({
                 <p className="font-body text-sm text-bronze italic leading-relaxed mb-5">
                   This Jangchub Chorten has no sponsor yet. Be the first to dedicate it and anchor your name along the Mau Chu River.
                 </p>
-                <button
-                  onClick={onSponsor}
-                  className="w-full bg-burgundy text-gold font-display text-xs tracking-widest uppercase py-3 text-center hover:bg-burgundy/90 transition-colors"
+                <Link
+                  to="/sponsor"
+                  className="w-full bg-burgundy text-gold font-display text-xs tracking-widest uppercase py-3 text-center hover:bg-burgundy/90 transition-colors block"
                 >
                   Sponsor this Jangchub Chorten
-                </button>
+                </Link>
               </div>
             ) : partners.length === 0 ? (
               <p className="font-body text-sm italic text-bronze px-1 pt-2">
