@@ -251,35 +251,17 @@ export default function ChortenMap({
                 No partners recorded yet.
               </p>
             ) : (
-              <>
-                <p className="font-display text-xs uppercase tracking-widest text-bronze">
-                  Merit Partners
+              <div className="flex flex-col items-center justify-center py-10 text-center px-4">
+                <div className="w-12 h-12 border border-burgundy/20 flex items-center justify-center mb-4">
+                  <HeartHandshake size={20} className="text-burgundy/40" strokeWidth={1} />
+                </div>
+                <p className="font-display text-sm text-burgundy uppercase tracking-wide mb-1">
+                  Sponsorship Fulfilled
                 </p>
-                {partners.map((partner, idx) => (
-                  <article key={`${partner.name}-${idx}`} className="border border-burgundy/10 p-3">
-                    <div className="flex items-start gap-3">
-                      <div className={`w-8 h-8 flex items-center justify-center flex-shrink-0 ${idx === 0 ? 'bg-burgundy text-gold' : 'bg-burgundy/10 text-bronze'}`}>
-                        {partner.type === 'lead' ? (
-                          <HeartHandshake size={14} />
-                        ) : (
-                          <User size={14} />
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-display text-xs uppercase tracking-wider text-burgundy">
-                          {partner.name}
-                        </p>
-                        <p className="font-body text-xs text-bronze mt-0.5">
-                          {partner.location} · {partner.type === 'lead' ? 'Lead Sponsor' : 'Merit Partner'}
-                        </p>
-                        <p className="font-body text-sm text-burgundy/70 italic mt-2 leading-relaxed">
-                          "{partner.dedication}"
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </>
+                <p className="font-body text-sm text-bronze italic leading-relaxed">
+                  This Jangchub Chorten has been sponsored.
+                </p>
+              </div>
             )}
           </div>
         </aside>

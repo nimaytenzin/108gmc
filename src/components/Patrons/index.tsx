@@ -86,38 +86,19 @@ export default function Patrons({
                 </button>
               </div>
 
-              <div className="px-4 py-3 border-b border-burgundy/10">
-                <p className="font-display text-xs uppercase tracking-widest text-bronze mb-1">
-                  Funding Status
-                </p>
-                <p className="font-body text-sm text-burgundy">
-                  {selectedStupa.status.toUpperCase()} · {selectedStupa.funding_percentage}%
-                </p>
-              </div>
-
-              <div className="p-4 space-y-3 max-h-[430px] overflow-y-auto">
-                <p className="font-display text-xs uppercase tracking-widest text-bronze">
-                  Donors
-                </p>
-                {selectedStupa.merit_partners.length > 0 ? (
-                  selectedStupa.merit_partners.map((partner, idx) => (
-                    <div key={`${partner.name}-${idx}`} className="border border-burgundy/10 p-3">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-burgundy/10 text-burgundy flex items-center justify-center">
-                          <User size={14} />
-                        </div>
-                        <div>
-                          <p className="font-display text-xs uppercase tracking-wider text-burgundy">
-                            {partner.name}
-                          </p>
-                          <p className="font-body text-xs text-bronze">{partner.location}</p>
-                          <p className="font-body text-sm text-burgundy/80 italic mt-2">
-                            "{partner.dedication}"
-                          </p>
-                        </div>
-                      </div>
+              <div className="p-4 flex flex-col items-center justify-center text-center py-8">
+                {selectedStupa.status === 'funded' ? (
+                  <>
+                    <div className="w-10 h-10 border border-burgundy/20 flex items-center justify-center mb-3">
+                      <User size={16} className="text-burgundy/40" strokeWidth={1} />
                     </div>
-                  ))
+                    <p className="font-display text-xs uppercase tracking-widest text-burgundy mb-1">
+                      Sponsorship Fulfilled
+                    </p>
+                    <p className="font-body text-sm italic text-bronze">
+                      This Jangchub Chorten has been sponsored.
+                    </p>
+                  </>
                 ) : (
                   <p className="font-body text-sm italic text-bronze">
                     This Jangchub Chorten awaits a patron. Be the first to dedicate it.
