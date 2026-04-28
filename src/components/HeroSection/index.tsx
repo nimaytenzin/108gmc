@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { differenceInSeconds } from 'date-fns';
 import { motion } from 'framer-motion';
+import stupaOutline from '../../../assets/bg.png';
 
 const TARGET = new Date('2026-11-01T00:00:00+06:00');
 
@@ -43,7 +44,13 @@ export default function HeroSection() {
 
   return (
     <section className="relative overflow-hidden bg-burgundy-dark">
-      {/* Decorative watermark */}
+{/* Decorative watermark */}
+      <img
+        src={stupaOutline}
+        alt=""
+        aria-hidden="true"
+        className="absolute left-0 top-1/2 -translate-x-[10%] -translate-y-1/2 h-full w-auto object-contain opacity-[0.06] pointer-events-none select-none"
+      />
       <div className="absolute right-0 top-0 text-[28rem] font-display font-bold text-gold/[0.03] leading-none select-none pointer-events-none overflow-hidden">
         108
       </div>

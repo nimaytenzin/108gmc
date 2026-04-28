@@ -7,6 +7,9 @@ import { X, User, HeartHandshake } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import chortenLocations from '../../data/chortenLocations';
 import type { Stupa } from '../../types/stupa';
+import stupaImgUrl from '../../../assets/stupa.png';
+import stupaFulfilledImgUrl from '../../../assets/stupa_fulfilled.png';
+import stupaPartialImgUrl from '../../../assets/stupa_partial.png';
 
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -19,50 +22,52 @@ function makeDivIcon(
   num: number,
   status: Stupa['status'] | 'unknown',
   isSelected: boolean,
-  fundingPct = 0,
 ) {
-  const size = 32;
-  const fontSize = num >= 100 ? 9 : 11;
+  const w = 30;
+  const h = 42;
 
-  let bg = '#ffffff';
-  let textColor = '#3D1022';
-  let border = '1px dashed rgba(142,109,78,0.4)';
-  let fillHtml = '';
-  let lockHtml = '';
+  const img = status === 'funded'
+    ? stupaFulfilledImgUrl
+    : status === 'partial'
+      ? stupaPartialImgUrl
+      : stupaImgUrl;
 
-  if (status === 'funded') {
-    bg = '#3D1022';
-    textColor = '#E9D5A1';
-    border = '1px solid #3D1022';
-  } else if (status === 'partial') {
-    bg = '#ffffff';
-    textColor = '#3D1022';
-    border = '1px solid rgba(61,16,34,0.3)';
-    const fillPx = Math.round((fundingPct / 100) * size);
-    fillHtml = `<div style="position:absolute;bottom:0;left:0;right:0;height:${fillPx}px;background:rgba(233,213,161,0.6);"></div>`;
-  } else {
-    lockHtml = `<div style="position:absolute;bottom:3px;right:3px;opacity:0.4;font-size:7px;color:#8E6D4E;">🔒</div>`;
-  }
+  const border = status === 'funded'
+    ? '1.5px solid #3D1022'
+    : status === 'partial'
+      ? '1.5px solid rgba(61,16,34,0.3)'
+      : '1.5px dashed rgba(142,109,78,0.5)';
 
   const ring = isSelected
-    ? 'outline:2px solid rgba(61,16,34,0.4);outline-offset:2px;'
+    ? 'outline:2.5px solid #3D1022;outline-offset:2px;'
     : '';
+
+  const fontSize = num >= 100 ? 7 : 9;
 
   return L.divIcon({
     className: '',
     html: `<div style="
-      position:relative;overflow:hidden;
-      width:${size}px;height:${size}px;
-      background:${bg};color:${textColor};
+      position:relative;
+      width:${w}px;height:${h}px;
       border:${border};
-      display:flex;align-items:center;justify-content:center;
-      font-size:${fontSize}px;font-weight:700;
-      font-family:'Cinzel',serif;letter-spacing:0.05em;
-      cursor:pointer;${ring}
-    ">${fillHtml}${lockHtml}<span style="position:relative;z-index:1;">${num}</span></div>`,
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-    popupAnchor: [0, -(size / 2 + 4)],
+      background:#ffffff;
+      overflow:hidden;
+      cursor:pointer;
+      ${ring}
+    ">
+      <img src="${img}" style="width:100%;height:100%;object-fit:contain;display:block;" draggable="false" />
+      <div style="
+        position:absolute;bottom:0;left:0;right:0;
+        background:rgba(255,255,255,0.88);
+        text-align:center;
+        padding:2px 0 1px;
+        font-family:'Cinzel',serif;font-size:${fontSize}px;font-weight:700;
+        color:#3D1022;letter-spacing:0.04em;line-height:1;
+      ">${num}</div>
+    </div>`,
+    iconSize: [w, h],
+    iconAnchor: [w / 2, h / 2],
+    popupAnchor: [0, -(h / 2 + 4)],
   });
 }
 
@@ -350,7 +355,7 @@ export default function ChortenMap({
               <Marker
                 key={c.id}
                 position={[c.lat, c.lng]}
-                icon={makeDivIcon(c.id, status, selectedId === c.id, funding)}
+                icon={makeDivIcon(c.id, status, selectedId === c.id)}
                 eventHandlers={{
                   click: () => onSelect(selectedId === c.id ? null : c.id),
                 }}

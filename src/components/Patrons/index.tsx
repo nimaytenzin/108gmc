@@ -190,7 +190,7 @@ function Legend() {
       </div>
       <div className="flex items-center gap-2">
         <div className="w-4 h-4 flex-shrink-0 bg-white border border-burgundy/30 relative overflow-hidden">
-          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gold/60" />
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-burgundy/60" />
         </div>
         <span className="font-display text-xs text-bronze uppercase tracking-widest">Open for Merit</span>
       </div>
