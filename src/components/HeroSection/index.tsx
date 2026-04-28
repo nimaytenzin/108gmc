@@ -32,7 +32,7 @@ const PROJECT_STATS = [
 ];
 
 const READINESS = [
-  { label: 'Site', status: 'CONFIRMED', desc: '12km along the Mao Chu' },
+  { label: 'Site', status: 'CONFIRMED', desc: '12km along the Mau Chu' },
   { label: 'Design', status: 'LOCKED', desc: 'Jangchub Chorten, 15m' },
   { label: 'Engineering', status: 'UNDERWAY', desc: 'Foundations in preparation' },
   { label: 'Volunteers', status: 'ACTIVE', desc: '40,000 needed for the final day' },
@@ -69,7 +69,7 @@ export default function HeroSection() {
 
             <p className="font-body text-gold/70 text-xl leading-relaxed mb-10 max-w-xl">
               A Royal initiative to raise 108 Jangchub Chortens in a single
-              coordinated day along the Mao Chu River, Gelephu Mindfulness City —
+              coordinated day along the Mau Chu River, Gelephu Mindfulness City —
               a collective act of merit for all sentient beings.
             </p>
 

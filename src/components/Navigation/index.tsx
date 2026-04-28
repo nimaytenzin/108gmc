@@ -8,7 +8,11 @@ const views = [
   { to: '/map', icon: Globe, label: 'Map View' },
 ];
 
-export default function Navigation() {
+interface NavigationProps {
+  onSponsor?: () => void;
+}
+
+export default function Navigation({ onSponsor }: NavigationProps) {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -67,21 +71,12 @@ export default function Navigation() {
         </div>
 
         {/* CTA */}
-        {isHome ? (
-          <a
-            href="#footer"
-            className="bg-gold text-burgundy px-5 py-2.5 font-display text-xs tracking-widest uppercase hover:bg-gold/90 transition-all duration-108"
-          >
-            Sponsor a Jangchub Chorten
-          </a>
-        ) : (
-          <Link
-            to="/"
-            className="bg-gold text-burgundy px-5 py-2.5 font-display text-xs tracking-widest uppercase hover:bg-gold/90 transition-all duration-108"
-          >
-            Back to Home
-          </Link>
-        )}
+        <button
+          onClick={onSponsor}
+          className="bg-gold text-burgundy px-5 py-2.5 font-display text-xs tracking-widest uppercase hover:bg-gold/90 transition-all duration-108"
+        >
+          Sponsor a Jangchub Chorten
+        </button>
       </div>
     </nav>
   );

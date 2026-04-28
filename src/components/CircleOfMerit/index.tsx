@@ -66,7 +66,7 @@ export default function CircleOfMerit({ stupa, onClose }: CircleOfMeritProps) {
                 </span>
               </div>
               <p className="font-display text-xs text-bronze uppercase tracking-wider mb-1">
-                Mao Chu River
+                Mau Chu River
               </p>
               <p className="font-body text-base text-gold mb-1">
                 {stupa.id <= 54 ? 'East Bank' : 'West Bank'} · Jangchub Chorten #{stupa.id}
@@ -151,7 +151,7 @@ export default function CircleOfMerit({ stupa, onClose }: CircleOfMeritProps) {
                     This Jangchub Chorten awaits its first patron.
                   </p>
                   <p className="font-body text-sm text-bronze/60 mt-2 max-w-xs leading-relaxed">
-                    Join the procession and anchor your name in the Mao Chu for generations to come.
+                    Join the procession and anchor your name in the Mau Chu for generations to come.
                   </p>
                 </div>
               )}

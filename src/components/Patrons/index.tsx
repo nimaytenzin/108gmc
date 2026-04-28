@@ -31,7 +31,7 @@ export default function Patrons({
     return (
       <div className="flex items-center justify-center h-64">
         <div className="font-display text-bronze text-sm uppercase tracking-widest animate-pulse">
-          Loading the Mao Chu Procession…
+          Loading the Mau Chu Procession…
         </div>
       </div>
     );

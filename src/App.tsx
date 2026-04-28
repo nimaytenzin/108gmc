@@ -6,16 +6,19 @@ import SummaryCards from './components/SummaryCards';
 import Patrons from './components/Patrons';
 import ChortenMap from './components/ChortenMap';
 import Footer from './components/Footer';
+import SponsorDialog from './components/SponsorDialog';
 import { mockStupas } from './data/mockStupas';
 
 export default function App() {
   const [selectedStupaId, setSelectedStupaId] = useState<number | null>(null);
+  const [sponsorOpen, setSponsorOpen] = useState(false);
   const stupas = mockStupas;
   const loading = false;
 
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
+      <Navigation onSponsor={() => setSponsorOpen(true)} />
+      <SponsorDialog isOpen={sponsorOpen} onClose={() => setSponsorOpen(false)} />
 
       <Routes>
         <Route
@@ -70,6 +73,7 @@ export default function App() {
                 stupas={stupas}
                 selectedId={selectedStupaId}
                 onSelect={setSelectedStupaId}
+                onSponsor={() => setSponsorOpen(true)}
               />
             </main>
           }

@@ -27,7 +27,7 @@ export default function Footer() {
             <p className="font-body text-bronze leading-relaxed mb-8 max-w-lg text-lg">
               Project 108 is a collective offering to the world. 108 Jangchub
               Jangchub Chortens, each standing 15 metres tall, raised in a single
-              coordinated day along the Mao Chu River as an act of merit for all
+              coordinated day along the Mau Chu River as an act of merit for all
               sentient beings everywhere.
             </p>
 
@@ -133,7 +133,7 @@ export default function Footer() {
             Initiative of the Kingdom of Bhutan.
           </p>
           <p className="font-display text-xs uppercase tracking-widest text-bronze/60">
-            1 November 2026 · Mao Chu River · Bhutan
+            1 November 2026 · Mau Chu River · Bhutan
           </p>
         </div>
       </div>

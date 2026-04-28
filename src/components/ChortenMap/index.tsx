@@ -111,6 +111,7 @@ interface ChortenMapProps {
   stupas: Stupa[];
   selectedId: number | null;
   onSelect: (id: number | null) => void;
+  onSponsor?: () => void;
   variant?: 'embedded' | 'fullscreen';
 }
 
@@ -124,6 +125,7 @@ export default function ChortenMap({
   stupas,
   selectedId,
   onSelect,
+  onSponsor,
   variant = 'embedded',
 }: ChortenMapProps) {
   const stupaDataMap = new Map(stupas.map((s) => [s.id, { status: s.status, funding: s.funding_percentage }]));
@@ -147,7 +149,7 @@ export default function ChortenMap({
               Chorten Locations
             </h2>
             <p className="font-body text-bronze mt-1 text-base">
-              108 Jangchub Chortens · Mao Chu River · Gelephu Mindfulness City · Click a marker to view details
+              108 Jangchub Chortens · Mau Chu River · Gelephu Mindfulness City · Click a marker to view details
             </p>
           </div>
           <MapLegend />
@@ -236,14 +238,14 @@ export default function ChortenMap({
                   Awaiting a Patron
                 </p>
                 <p className="font-body text-sm text-bronze italic leading-relaxed mb-5">
-                  This Jangchub Chorten has no sponsor yet. Be the first to dedicate it and anchor your name along the Mao Chu River.
+                  This Jangchub Chorten has no sponsor yet. Be the first to dedicate it and anchor your name along the Mau Chu River.
                 </p>
-                <a
-                  href="mailto:108@gmc.bt?subject=Jangchub Chorten Sponsorship Inquiry"
+                <button
+                  onClick={onSponsor}
                   className="w-full bg-burgundy text-gold font-display text-xs tracking-widest uppercase py-3 text-center hover:bg-burgundy/90 transition-colors"
                 >
                   Sponsor this Jangchub Chorten
-                </a>
+                </button>
               </div>
             ) : partners.length === 0 ? (
               <p className="font-body text-sm italic text-bronze px-1 pt-2">
