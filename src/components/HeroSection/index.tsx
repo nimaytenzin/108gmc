@@ -61,20 +61,20 @@ export default function HeroSection() {
               A Royal Initiative · Bhutan · 2026
             </span>
 
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.95] mb-6 text-gold">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.95] mb-6 text-gold">
               108 Jangchub Chortens.
               <br />
               <span className="text-bronze">One Day.</span>
             </h1>
 
-            <p className="font-body text-gold/70 text-xl leading-relaxed mb-10 max-w-xl">
+            <p className="font-body text-gold/70 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
               A Royal initiative to raise 108 Jangchub Chortens in a single
               coordinated day along the Mau Chu River, Gelephu Mindfulness City —
               a collective act of merit for all sentient beings.
             </p>
 
             <blockquote className="border-l-2 border-bronze pl-6 mb-10">
-              <p className="font-body text-gold/80 italic text-xl leading-relaxed mb-4">
+              <p className="font-body text-gold/80 italic text-lg md:text-xl leading-relaxed mb-4">
                 "We must do it to prove to ourselves that, as we face the
                 challenges ahead, there is no limit to what we can achieve when
                 we stand together."
@@ -88,7 +88,7 @@ export default function HeroSection() {
             </blockquote>
 
             {/* Stats grid */}
-            <div className="grid grid-cols-4 gap-4 pt-6 border-t border-gold/10">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-gold/10">
               {PROJECT_STATS.map((s) => (
                 <div key={s.label} className="text-center">
                   <div className="font-display text-2xl md:text-3xl font-bold text-gold">

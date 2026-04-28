@@ -86,11 +86,11 @@ export default function SponsorPage() {
                 </p>
               </div>
               <div className="px-6 py-6 space-y-4">
-                <div className="flex justify-between items-baseline gap-4">
+                <div className="flex flex-wrap justify-between items-baseline gap-2">
                   <span className="font-display text-xs text-bronze uppercase tracking-wider flex-shrink-0">Account Name</span>
-                  <span className="font-display text-sm font-bold text-burgundy">108 STUPAS</span>
+                  <span className="font-display text-sm font-bold text-burgundy text-right">108 STUPAS</span>
                 </div>
-                <div className="flex justify-between items-baseline gap-4">
+                <div className="flex flex-wrap justify-between items-baseline gap-2">
                   <span className="font-display text-xs text-bronze uppercase tracking-wider flex-shrink-0">Account Number</span>
                   <button
                     type="button"
@@ -126,11 +126,11 @@ export default function SponsorPage() {
                 </p>
               </div>
               <div className="px-6 py-6 space-y-4">
-                <div className="flex justify-between items-baseline gap-4">
+                <div className="flex flex-wrap justify-between items-baseline gap-2">
                   <span className="font-display text-xs text-bronze uppercase tracking-wider flex-shrink-0">Account Name</span>
-                  <span className="font-display text-sm font-bold text-burgundy">108 STUPAS</span>
+                  <span className="font-display text-sm font-bold text-burgundy text-right">108 STUPAS</span>
                 </div>
-                <div className="flex justify-between items-baseline gap-4">
+                <div className="flex flex-wrap justify-between items-baseline gap-2">
                   <span className="font-display text-xs text-bronze uppercase tracking-wider flex-shrink-0">Local (BTN)</span>
                   <button
                     type="button"
@@ -142,7 +142,7 @@ export default function SponsorPage() {
                     {copiedField === 'dk-local' ? <Check size={13} /> : <Copy size={13} />}
                   </button>
                 </div>
-                <div className="flex justify-between items-baseline gap-4">
+                <div className="flex flex-wrap justify-between items-baseline gap-2">
                   <span className="font-display text-xs text-bronze uppercase tracking-wider flex-shrink-0">USD Account</span>
                   <button
                     type="button"

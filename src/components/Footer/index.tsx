@@ -2,8 +2,8 @@ import { Globe, Mail, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer id="footer" className="bg-burgundy-dark border-t border-gold/20 mx-4 md:mx-8 mb-4 md:mb-8 overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto p-10 md:p-16">
+    <footer id="footer" className="bg-burgundy-dark border-t border-gold/20 mx-2 md:mx-4 lg:mx-8 mb-2 md:mb-4 lg:mb-8 overflow-hidden">
+      <div className="max-w-screen-2xl mx-auto p-6 md:p-10 lg:p-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-12">
           {/* Left */}
           <div>

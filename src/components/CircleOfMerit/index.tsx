@@ -91,12 +91,12 @@ export default function CircleOfMerit({ stupa, onClose }: CircleOfMeritProps) {
 
           {/* Right Panel */}
           <div className="lg:col-span-8 flex flex-col overflow-hidden">
-            <div className="flex justify-between items-center p-6 border-b border-burgundy/10">
-              <h3 className="font-display text-lg font-bold text-burgundy flex items-center gap-2 uppercase tracking-wide">
-                <User size={16} className="text-bronze" strokeWidth={1.5} />
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-5 md:p-6 border-b border-burgundy/10">
+              <h3 className="font-display text-base md:text-lg font-bold text-burgundy flex items-center gap-2 uppercase tracking-wide">
+                <User size={16} className="text-bronze shrink-0" strokeWidth={1.5} />
                 Circle of Merit · Jangchub Chorten #{stupa.id}
               </h3>
-              <span className="font-display text-xs uppercase tracking-widest text-bronze border border-burgundy/20 px-3 py-1">
+              <span className="font-display text-xs uppercase tracking-widest text-bronze border border-burgundy/20 px-3 py-1 self-start sm:self-auto">
                 {statusLabel}
               </span>
             </div>

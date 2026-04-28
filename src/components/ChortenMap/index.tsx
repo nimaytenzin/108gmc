@@ -156,7 +156,7 @@ export default function ChortenMap({
       )}
 
       {isFullscreen && (
-        <div className="fixed top-[84px] left-4 z-[1100] flex flex-col gap-2">
+        <div className="fixed top-[68px] md:top-[84px] left-2 md:left-4 z-[1100] flex flex-col gap-2">
           <div className="bg-white/95 backdrop-blur border border-burgundy/15 shadow-lg px-3 py-2">
             <div className="flex items-center gap-3">
               <span className="font-display text-xs uppercase tracking-widest text-burgundy">
@@ -194,7 +194,7 @@ export default function ChortenMap({
         </div>
       )}
       {isFullscreen && selectedId && (
-        <aside className="fixed right-4 top-[84px] bottom-4 z-[1100] w-[360px] max-w-[calc(100vw-2rem)] bg-white/95 backdrop-blur border border-burgundy/20 shadow-xl flex flex-col">
+        <aside className="fixed bottom-0 left-0 right-0 z-[1100] max-h-[60vh] md:bottom-4 md:left-auto md:right-4 md:top-[84px] md:max-h-none md:w-[360px] bg-white/95 backdrop-blur border-t border-burgundy/20 md:border md:border-burgundy/20 shadow-xl flex flex-col">
           <div className="flex items-center justify-between border-b border-burgundy/10 px-4 py-3">
             <div>
               <p className="font-display text-xs uppercase tracking-widest text-bronze">
