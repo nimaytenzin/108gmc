@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MapContainer, TileLayer, Marker, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
@@ -193,79 +194,107 @@ export default function ChortenMap({
           </div>
         </div>
       )}
-      {isFullscreen && selectedId && (
-        <aside className="fixed bottom-0 left-0 right-0 z-[1100] max-h-[60vh] md:bottom-4 md:left-auto md:right-4 md:top-[84px] md:max-h-none md:w-[360px] bg-white/95 backdrop-blur border-t border-burgundy/20 md:border md:border-burgundy/20 shadow-xl flex flex-col">
-          <div className="flex items-center justify-between border-b border-burgundy/10 px-4 py-3">
-            <div>
-              <p className="font-display text-xs uppercase tracking-widest text-bronze">
-                Jangchub Chorten Details
-              </p>
-              <h3 className="font-display text-lg text-burgundy font-bold">
-                JANGCHUB CHORTEN #{selectedId}
-              </h3>
-            </div>
-            <button
-              type="button"
+      <AnimatePresence>
+        {isFullscreen && selectedId && (
+          <>
+            {/* Backdrop — mobile only */}
+            <motion.div
+              key="map-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/40 z-[1050] md:hidden"
               onClick={() => onSelect(null)}
-              className="w-8 h-8 border border-burgundy/20 flex items-center justify-center text-burgundy hover:bg-burgundy/5"
+            />
+
+            {/* Panel — bottom sheet on mobile, right sidebar on md+ */}
+            <motion.aside
+              key="map-panel"
+              initial={{ y: '100%', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: '100%', opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 35 }}
+              className="fixed bottom-0 left-0 right-0 z-[1100] max-h-[70vh] md:bottom-4 md:left-auto md:right-4 md:top-[84px] md:max-h-none md:w-[360px] bg-white/95 backdrop-blur border-t border-burgundy/20 md:border md:border-burgundy/20 shadow-2xl flex flex-col"
             >
-              <X size={14} />
-            </button>
-          </div>
+              {/* Drag handle — mobile only */}
+              <div className="flex justify-center pt-2.5 pb-1 flex-shrink-0 md:hidden">
+                <div className="w-10 h-1 bg-burgundy/20" />
+              </div>
 
-          <div className="px-4 py-3 border-b border-burgundy/10 bg-burgundy/[0.02]">
-            <p className="font-display text-xs uppercase tracking-widest text-bronze mb-1">
-              Status
-            </p>
-            <p className="font-display text-sm text-burgundy font-bold uppercase tracking-wide">
-              {STATUS_LABEL[selectedStupa?.status ?? 'available']}
-            </p>
-            {selectedStupa && selectedStupa.status !== 'available' && (
-              <p className="font-body text-xs text-bronze mt-0.5">
-                {selectedStupa.funding_percentage}% funded
-              </p>
-            )}
-          </div>
-
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-            {selectedStupa?.status === 'available' ? (
-              <div className="flex flex-col items-center justify-center py-10 text-center px-4">
-                <div className="w-12 h-12 border border-dashed border-bronze/30 flex items-center justify-center mb-4">
-                  <HeartHandshake size={20} className="text-bronze/40" strokeWidth={1} />
+              <div className="flex items-center justify-between border-b border-burgundy/10 px-4 py-3 flex-shrink-0">
+                <div>
+                  <p className="font-display text-xs uppercase tracking-widest text-bronze">
+                    Jangchub Chorten Details
+                  </p>
+                  <h3 className="font-display text-lg text-burgundy font-bold">
+                    JANGCHUB CHORTEN #{selectedId}
+                  </h3>
                 </div>
-                <p className="font-display text-sm text-burgundy uppercase tracking-wide mb-1">
-                  Awaiting a Patron
-                </p>
-                <p className="font-body text-sm text-bronze italic leading-relaxed mb-5">
-                  This Jangchub Chorten has no sponsor yet. Be the first to dedicate it and anchor your name along the Mau Chu River.
-                </p>
-                <Link
-                  to="/sponsor"
-                  className="w-full bg-burgundy text-gold font-display text-xs tracking-widest uppercase py-3 text-center hover:bg-burgundy/90 transition-colors block"
+                <button
+                  type="button"
+                  onClick={() => onSelect(null)}
+                  className="w-8 h-8 border border-burgundy/20 flex items-center justify-center text-burgundy hover:bg-burgundy/5"
                 >
-                  Sponsor this Jangchub Chorten
-                </Link>
+                  <X size={14} />
+                </button>
               </div>
-            ) : partners.length === 0 ? (
-              <p className="font-body text-sm italic text-bronze px-1 pt-2">
-                No partners recorded yet.
-              </p>
-            ) : (
-              <div className="flex flex-col items-center justify-center py-10 text-center px-4">
-                <div className="w-12 h-12 border border-burgundy/20 flex items-center justify-center mb-4">
-                  <HeartHandshake size={20} className="text-burgundy/40" strokeWidth={1} />
-                </div>
-                <p className="font-display text-sm text-burgundy uppercase tracking-wide mb-1">
-                  Sponsorship Fulfilled
+
+              <div className="px-4 py-3 border-b border-burgundy/10 bg-burgundy/[0.02] flex-shrink-0">
+                <p className="font-display text-xs uppercase tracking-widest text-bronze mb-1">
+                  Status
                 </p>
-                <p className="font-body text-sm text-bronze italic leading-relaxed">
-                  This Jangchub Chorten has been sponsored.
+                <p className="font-display text-sm text-burgundy font-bold uppercase tracking-wide">
+                  {STATUS_LABEL[selectedStupa?.status ?? 'available']}
                 </p>
+                {selectedStupa && selectedStupa.status !== 'available' && (
+                  <p className="font-body text-xs text-bronze mt-0.5">
+                    {selectedStupa.funding_percentage}% funded
+                  </p>
+                )}
               </div>
-            )}
-          </div>
-        </aside>
-      )}
+
+              <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+                {selectedStupa?.status === 'available' ? (
+                  <div className="flex flex-col items-center justify-center py-10 text-center px-4">
+                    <div className="w-12 h-12 border border-dashed border-bronze/30 flex items-center justify-center mb-4">
+                      <HeartHandshake size={20} className="text-bronze/40" strokeWidth={1} />
+                    </div>
+                    <p className="font-display text-sm text-burgundy uppercase tracking-wide mb-1">
+                      Awaiting a Patron
+                    </p>
+                    <p className="font-body text-sm text-bronze italic leading-relaxed mb-5">
+                      This Jangchub Chorten has no sponsor yet. Be the first to dedicate it and anchor your name along the Mau Chu River.
+                    </p>
+                    <Link
+                      to="/sponsor"
+                      className="w-full bg-burgundy text-gold font-display text-xs tracking-widest uppercase py-3 text-center hover:bg-burgundy/90 transition-colors block"
+                    >
+                      Sponsor this Jangchub Chorten
+                    </Link>
+                  </div>
+                ) : partners.length === 0 ? (
+                  <p className="font-body text-sm italic text-bronze px-1 pt-2">
+                    No partners recorded yet.
+                  </p>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-10 text-center px-4">
+                    <div className="w-12 h-12 border border-burgundy/20 flex items-center justify-center mb-4">
+                      <HeartHandshake size={20} className="text-burgundy/40" strokeWidth={1} />
+                    </div>
+                    <p className="font-display text-sm text-burgundy uppercase tracking-wide mb-1">
+                      Sponsorship Fulfilled
+                    </p>
+                    <p className="font-body text-sm text-bronze italic leading-relaxed">
+                      This Jangchub Chorten has been sponsored.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
 
       <div
         className={isFullscreen ? '' : 'border border-burgundy/15'}

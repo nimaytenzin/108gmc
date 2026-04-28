@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, X, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import StupaCard from './StupaCard';
 import type { Stupa } from '../../types/stupa';
 
@@ -65,64 +67,117 @@ export default function Patrons({
           ))}
         </div>
 
-        <aside className="border border-burgundy/15 bg-white">
-          {selectedStupa ? (
-            <>
-              <div className="flex items-center justify-between px-4 py-3 border-b border-burgundy/10">
-                <div>
-                  <p className="font-display text-xs uppercase tracking-widest text-bronze">
-                    Jangchub Chorten Details
-                  </p>
-                  <h3 className="font-display text-lg font-bold text-burgundy">
-                    JANGCHUB CHORTEN #{selectedStupa.id}
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => onSelect(null)}
-                  className="w-8 h-8 border border-burgundy/20 flex items-center justify-center text-burgundy hover:bg-burgundy/5"
-                >
-                  <X size={14} />
-                </button>
-              </div>
-
-              <div className="p-4 flex flex-col items-center justify-center text-center py-8">
-                {selectedStupa.status === 'funded' ? (
-                  <>
-                    <div className="w-10 h-10 border border-burgundy/20 flex items-center justify-center mb-3">
-                      <User size={16} className="text-burgundy/40" strokeWidth={1} />
-                    </div>
-                    <p className="font-display text-xs uppercase tracking-widest text-burgundy mb-1">
-                      Sponsorship Fulfilled
-                    </p>
-                    <p className="font-body text-sm italic text-bronze">
-                      This Jangchub Chorten has been sponsored.
-                    </p>
-                  </>
-                ) : (
-                  <p className="font-body text-sm italic text-bronze">
-                    This Jangchub Chorten awaits a patron. Be the first to dedicate it.
-                  </p>
-                )}
-              </div>
-            </>
-          ) : (
-            <div className="p-8 text-center text-bronze">
-              <div className="w-12 h-12 border border-burgundy/20 flex items-center justify-center mx-auto mb-4">
-                <MapPin size={20} className="text-bronze/50" strokeWidth={1} />
-              </div>
-              <p className="font-display uppercase tracking-widest text-xs mb-2 text-burgundy">
-                Side Panel
-              </p>
-              <p className="font-body text-sm italic">
-                Click a Jangchub Chorten to open details here.
-              </p>
-            </div>
-          )}
+        {/* Desktop aside — hidden on mobile, shown lg+ in grid */}
+        <aside className="hidden lg:flex flex-col border border-burgundy/15 bg-white">
+          <AsideContent selectedStupa={selectedStupa} onClose={() => onSelect(null)} />
         </aside>
       </div>
 
+      {/* Mobile bottom sheet — lg and below only */}
+      <AnimatePresence>
+        {selectedStupa && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+              onClick={() => onSelect(null)}
+            />
+            {/* Sheet */}
+            <motion.aside
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', stiffness: 350, damping: 35 }}
+              className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-burgundy/20 shadow-2xl lg:hidden max-h-[70vh] flex flex-col"
+            >
+              {/* Drag handle */}
+              <div className="flex justify-center pt-2.5 pb-1 flex-shrink-0">
+                <div className="w-10 h-1 bg-burgundy/20" />
+              </div>
+              <AsideContent selectedStupa={selectedStupa} onClose={() => onSelect(null)} />
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </div>
+  );
+}
+
+function AsideContent({
+  selectedStupa,
+  onClose,
+}: {
+  selectedStupa: Stupa | null;
+  onClose: () => void;
+}) {
+  if (!selectedStupa) {
+    return (
+      <div className="p-8 text-center text-bronze">
+        <div className="w-12 h-12 border border-burgundy/20 flex items-center justify-center mx-auto mb-4">
+          <MapPin size={20} className="text-bronze/50" strokeWidth={1} />
+        </div>
+        <p className="font-display uppercase tracking-widest text-xs mb-2 text-burgundy">
+          Side Panel
+        </p>
+        <p className="font-body text-sm italic">
+          Click a Jangchub Chorten to open details here.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className="flex items-center justify-between px-4 py-3 border-b border-burgundy/10 flex-shrink-0">
+        <div>
+          <p className="font-display text-xs uppercase tracking-widest text-bronze">
+            Jangchub Chorten Details
+          </p>
+          <h3 className="font-display text-lg font-bold text-burgundy">
+            JANGCHUB CHORTEN #{selectedStupa.id}
+          </h3>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="w-8 h-8 border border-burgundy/20 flex items-center justify-center text-burgundy hover:bg-burgundy/5"
+        >
+          <X size={14} />
+        </button>
+      </div>
+
+      <div className="overflow-y-auto flex-1 p-4 flex flex-col items-center justify-center text-center py-8">
+        {selectedStupa.status === 'funded' ? (
+          <>
+            <div className="w-10 h-10 border border-burgundy/20 flex items-center justify-center mb-3">
+              <User size={16} className="text-burgundy/40" strokeWidth={1} />
+            </div>
+            <p className="font-display text-xs uppercase tracking-widest text-burgundy mb-1">
+              Sponsorship Fulfilled
+            </p>
+            <p className="font-body text-sm italic text-bronze">
+              This Jangchub Chorten has been sponsored.
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="font-body text-sm italic text-bronze mb-5">
+              This Jangchub Chorten awaits a patron. Be the first to dedicate it.
+            </p>
+            <Link
+              to="/sponsor"
+              className="w-full bg-burgundy text-gold font-display text-xs tracking-widest uppercase py-3 text-center hover:bg-burgundy/90 transition-colors block"
+            >
+              Sponsor this Jangchub Chorten
+            </Link>
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
