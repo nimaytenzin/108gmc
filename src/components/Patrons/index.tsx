@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, X, User } from 'lucide-react';
+import { MapPin, X, User, Map } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StupaCard from './StupaCard';
 import type { Stupa } from '../../types/stupa';
@@ -141,13 +141,22 @@ function AsideContent({
             JANGCHUB CHORTEN #{selectedStupa.id}
           </h3>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="w-8 h-8 border border-burgundy/20 flex items-center justify-center text-burgundy hover:bg-burgundy/5"
-        >
-          <X size={14} />
-        </button>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/map"
+            className="flex items-center gap-1.5 border border-burgundy/20 px-2.5 py-1.5 text-burgundy hover:bg-burgundy/5 font-display text-xs uppercase tracking-widest"
+          >
+            <Map size={12} />
+            Map
+          </Link>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-8 h-8 border border-burgundy/20 flex items-center justify-center text-burgundy hover:bg-burgundy/5"
+          >
+            <X size={14} />
+          </button>
+        </div>
       </div>
 
       <div className="overflow-y-auto flex-1 p-4 flex flex-col items-center justify-center text-center py-8">

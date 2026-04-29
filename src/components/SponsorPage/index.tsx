@@ -54,7 +54,7 @@ export default function SponsorPage() {
               </div>
             </a>
             <a
-              href="tel:+97517133171"
+              href="tel:+97577801905"
               className="flex items-center gap-4 border border-burgundy/15 p-5 hover:border-burgundy/40 transition-colors group"
             >
               <div className="w-11 h-11 bg-burgundy/5 flex items-center justify-center flex-shrink-0 group-hover:bg-burgundy/10 transition-colors">
@@ -62,7 +62,7 @@ export default function SponsorPage() {
               </div>
               <div>
                 <p className="font-display text-xs text-bronze uppercase tracking-wider mb-0.5">Phone</p>
-                <p className="font-display text-base font-bold text-burgundy">+975 17133171</p>
+                <p className="font-display text-base font-bold text-burgundy">+975 77801905</p>
               </div>
             </a>
           </div>
