@@ -10,6 +10,7 @@ export interface Stupa {
   status: 'funded' | 'partial' | 'available';
   funding_percentage: number;
   merit_partners: MeritPartner[];
+  reserved?: boolean;
 }
 
 export interface StupaStats {

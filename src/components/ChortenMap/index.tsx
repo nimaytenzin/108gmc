@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MapContainer, TileLayer, Marker, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
-import { X, User, HeartHandshake } from 'lucide-react';
+import { X, User, HeartHandshake, Lock } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import chortenLocations from '../../data/chortenLocations';
 import type { Stupa } from '../../types/stupa';
@@ -279,6 +279,18 @@ export default function ChortenMap({
                     >
                       Sponsor this Jangchub Chorten
                     </Link>
+                  </div>
+                ) : selectedStupa?.reserved ? (
+                  <div className="flex flex-col items-center justify-center py-10 text-center px-4">
+                    <div className="w-12 h-12 border border-burgundy/20 flex items-center justify-center mb-4">
+                      <Lock size={18} className="text-burgundy/40" strokeWidth={1} />
+                    </div>
+                    <p className="font-display text-sm text-burgundy uppercase tracking-wide mb-1">
+                      Reserved
+                    </p>
+                    <p className="font-body text-sm text-bronze italic leading-relaxed">
+                      This Jangchub Chorten has been reserved.
+                    </p>
                   </div>
                 ) : partners.length === 0 ? (
                   <p className="font-body text-sm italic text-bronze px-1 pt-2">

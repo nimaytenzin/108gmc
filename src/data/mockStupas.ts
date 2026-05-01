@@ -4,7 +4,8 @@ const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'm
   1: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'His Majesty The King of Bhutan', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    reserved: true,
+    merit_partners: [],
   },
   3: {
     status: 'funded',
@@ -14,12 +15,14 @@ const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'm
   7: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'Her Majesty The Gyaltsuen', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    reserved: true,
+    merit_partners: [],
   },
   8: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'Her Majesty The Gyaltsuen', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    reserved: true,
+    merit_partners: [],
   },
   9: {
     status: 'funded',
@@ -29,7 +32,8 @@ const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'm
   11: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'Her Majesty The Gyaltsuen', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    reserved: true,
+    merit_partners: [],
   },
   13: {
     status: 'funded',
@@ -114,7 +118,8 @@ const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'm
   108: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'His Majesty The King of Bhutan', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    reserved: true,
+    merit_partners: [],
   },
 };
 

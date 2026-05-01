@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, X, User, Map, ZoomIn, HeartHandshake } from 'lucide-react';
+import { MapPin, X, User, Map, ZoomIn, HeartHandshake, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StupaCard from './StupaCard';
 import type { Stupa } from '../../types/stupa';
@@ -157,7 +157,19 @@ function AsideContent({
       </div>
 
       <div className="overflow-y-auto flex-1 p-4 flex flex-col items-center justify-center text-center py-8">
-        {selectedStupa.status === 'funded' ? (
+        {selectedStupa.reserved ? (
+          <>
+            <div className="w-10 h-10 border border-burgundy/20 flex items-center justify-center mb-3">
+              <Lock size={18} className="text-burgundy/40" strokeWidth={1} />
+            </div>
+            <p className="font-display text-xs uppercase tracking-widest text-burgundy mb-1">
+              Reserved
+            </p>
+            <p className="font-body text-sm italic text-bronze">
+              This Jangchub Chorten has been reserved.
+            </p>
+          </>
+        ) : selectedStupa.status === 'funded' ? (
           <>
             <div className="w-10 h-10 border border-burgundy/20 flex items-center justify-center mb-3">
               <HeartHandshake size={20} className="text-burgundy/40" strokeWidth={1} />
