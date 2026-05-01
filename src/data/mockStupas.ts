@@ -1,6 +1,6 @@
 import type { Stupa } from '../types/stupa';
 
-const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'merit_partners'>> = {
+const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'merit_partners' | 'reserved'>> = {
   1: {
     status: 'funded',
     funding_percentage: 100,
