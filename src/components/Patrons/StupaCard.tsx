@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import stupaImg from '../../../assets/stupa.png';
-import stupaFulfilledImg from '../../../assets/stupa_fulfilled.png';
+import stupaFulfilledImg from '../../../assets/light_stupa_filled.png';
 import stupaPartialImg from '../../../assets/stupa_partial.png';
 import type { Stupa } from '../../types/stupa';
 

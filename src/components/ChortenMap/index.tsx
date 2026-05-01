@@ -8,7 +8,7 @@ import 'leaflet/dist/leaflet.css';
 import chortenLocations from '../../data/chortenLocations';
 import type { Stupa } from '../../types/stupa';
 import stupaImgUrl from '../../../assets/stupa.png';
-import stupaFulfilledImgUrl from '../../../assets/stupa_fulfilled.png';
+import stupaFulfilledImgUrl from '../../../assets/light_stupa_filled.png';
 import stupaPartialImgUrl from '../../../assets/stupa_partial.png';
 
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
