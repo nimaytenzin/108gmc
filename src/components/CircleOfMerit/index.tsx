@@ -29,6 +29,21 @@ export default function CircleOfMerit({ stupa, onClose }: CircleOfMeritProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-burgundy/10">
           {/* Left Panel */}
           <div className="lg:col-span-4 p-6 md:p-8 space-y-4">
+            {/* Lead Patron Name */}
+            {stupa.merit_partners?.length > 0 && (
+              <div className="border border-gold/30 bg-gold/5 p-5">
+                <span className="font-display text-xs text-bronze uppercase tracking-[0.2em]">
+                  Lead Patron
+                </span>
+                <p className="font-display text-base font-bold text-burgundy mt-2 leading-snug">
+                  {stupa.merit_partners[0].name}
+                </p>
+                <p className="font-display text-xs text-bronze uppercase tracking-wider mt-1">
+                  {stupa.merit_partners[0].location}
+                </p>
+              </div>
+            )}
+
             {/* Stats */}
             <div className="border border-burgundy/10 p-6">
               <span className="font-display text-xs text-bronze uppercase tracking-[0.2em]">

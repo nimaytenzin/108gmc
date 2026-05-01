@@ -291,8 +291,17 @@ export default function ChortenMap({
                       Sponsorship Fulfilled
                     </p>
                     <p className="font-body text-sm text-bronze italic leading-relaxed">
-                      This Jangchub Chorten has been sponsored.
+                      This Jangchub Chorten has been sponsored by
                     </p>
+                    {partners.length > 0 && (
+                      <div className="mt-3 space-y-1">
+                        {partners.map((p, idx) => (
+                          <p key={idx} className="font-display text-base font-bold text-burgundy uppercase tracking-wide">
+                            {p.name}
+                          </p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
