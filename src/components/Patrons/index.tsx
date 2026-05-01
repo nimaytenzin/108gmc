@@ -1,9 +1,18 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, X, User, Map } from 'lucide-react';
+import { MapPin, X, User, Map, ZoomIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import StupaCard from './StupaCard';
 import type { Stupa } from '../../types/stupa';
+import imgDay from '../../../assets/V3.png';
+import imgAerial from '../../../assets/V6.png';
+import imgNight from '../../../assets/V7.png';
+
+const GALLERY = [
+  { src: imgDay, label: 'By Day' },
+  { src: imgAerial, label: 'The Path' },
+  { src: imgNight, label: 'By Night' },
+];
 
 interface PatronsProps {
   stupas: Stupa[];
@@ -115,19 +124,7 @@ function AsideContent({
   onClose: () => void;
 }) {
   if (!selectedStupa) {
-    return (
-      <div className="p-8 text-center text-bronze">
-        <div className="w-12 h-12 border border-burgundy/20 flex items-center justify-center mx-auto mb-4">
-          <MapPin size={20} className="text-bronze/50" strokeWidth={1} />
-        </div>
-        <p className="font-display uppercase tracking-widest text-xs mb-2 text-burgundy">
-          Side Panel
-        </p>
-        <p className="font-body text-sm italic">
-          Click a Jangchub Chorten to open details here.
-        </p>
-      </div>
-    );
+    return <GalleryPanel />;
   }
 
   return (
@@ -195,6 +192,71 @@ function AsideContent({
           </>
         )}
       </div>
+    </>
+  );
+}
+
+function GalleryPanel() {
+  const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
+
+  return (
+    <>
+      <div className="flex flex-col overflow-y-auto">
+        <div className="grid grid-cols-1">
+          {GALLERY.map(({ src, label }) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => setLightbox({ src, label })}
+              className="relative overflow-hidden group block w-full text-left focus:outline-none"
+            >
+              <img src={src} alt={label} className="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" draggable={false} />
+              <div className="absolute inset-0 bg-gradient-to-t from-burgundy/70 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-4 py-3 pointer-events-none">
+                <span className="font-display text-xs uppercase tracking-widest text-gold">{label}</span>
+                <ZoomIn size={14} className="text-gold/70" strokeWidth={1.5} />
+              </div>
+            </button>
+          ))}
+        </div>
+        <div className="p-6 text-center text-bronze border-t border-burgundy/10">
+          <div className="w-10 h-10 border border-burgundy/20 flex items-center justify-center mx-auto mb-3">
+            <MapPin size={16} className="text-bronze/50" strokeWidth={1} />
+          </div>
+          <p className="font-display uppercase tracking-widest text-xs mb-1 text-burgundy">Side Panel</p>
+          <p className="font-body text-sm italic">Click a Jangchub Chorten to open details here.</p>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[200] bg-black/80 flex items-center justify-center p-4"
+            onClick={() => setLightbox(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative max-w-4xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img src={lightbox.src} alt={lightbox.label} className="w-full h-auto object-contain" draggable={false} />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-6 py-4 flex items-end justify-between">
+                <span className="font-display text-sm uppercase tracking-widest text-gold">{lightbox.label}</span>
+                <button type="button" onClick={() => setLightbox(null)} className="w-8 h-8 border border-gold/30 flex items-center justify-center text-gold hover:bg-gold/10">
+                  <X size={14} />
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
