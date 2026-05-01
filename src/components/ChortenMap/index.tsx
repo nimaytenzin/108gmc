@@ -24,7 +24,9 @@ function makeDivIcon(
   isSelected: boolean,
 ) {
   const w = 30;
-  const h = 42;
+  const imgH = 42;
+  const numH = 13;
+  const totalH = imgH + numH;
 
   const img = status === 'funded'
     ? stupaFulfilledImgUrl
@@ -42,32 +44,32 @@ function makeDivIcon(
     ? 'outline:2.5px solid #3D1022;outline-offset:2px;'
     : '';
 
+  const numColor = status === 'funded' ? '#3D1022' : '#8E6D4E';
   const fontSize = num >= 100 ? 7 : 9;
 
   return L.divIcon({
     className: '',
-    html: `<div style="
-      position:relative;
-      width:${w}px;height:${h}px;
-      border:${border};
-      background:#ffffff;
-      overflow:hidden;
-      cursor:pointer;
-      ${ring}
-    ">
-      <img src="${img}" style="width:100%;height:100%;object-fit:contain;display:block;" draggable="false" />
+    html: `<div style="display:flex;flex-direction:column;align-items:center;width:${w}px;">
       <div style="
-        position:absolute;bottom:0;left:0;right:0;
-        background:rgba(255,255,255,0.88);
+        width:${w}px;height:${imgH}px;
+        border:${border};
+        background:#ffffff;
+        overflow:hidden;
+        cursor:pointer;
+        ${ring}
+      ">
+        <img src="${img}" style="width:100%;height:100%;object-fit:contain;display:block;" draggable="false" />
+      </div>
+      <div style="
         text-align:center;
-        padding:2px 0 1px;
+        padding:1px 0 0;
         font-family:'Cinzel',serif;font-size:${fontSize}px;font-weight:700;
-        color:#3D1022;letter-spacing:0.04em;line-height:1;
+        color:${numColor};letter-spacing:0.04em;line-height:1;
       ">${num}</div>
     </div>`,
-    iconSize: [w, h],
-    iconAnchor: [w / 2, h / 2],
-    popupAnchor: [0, -(h / 2 + 4)],
+    iconSize: [w, totalH],
+    iconAnchor: [w / 2, totalH / 2],
+    popupAnchor: [0, -(totalH / 2 + 4)],
   });
 }
 

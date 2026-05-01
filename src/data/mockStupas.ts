@@ -14,12 +14,12 @@ const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'm
   7: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'Her Majesty The Queen of Bhutan', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    merit_partners: [{ name: 'Her Majesty The Gyaltsuen', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
   },
   8: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'Her Majesty The Queen of Bhutan', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    merit_partners: [{ name: 'Her Majesty The Gyaltsuen', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
   },
   9: {
     status: 'funded',
@@ -29,7 +29,12 @@ const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'm
   11: {
     status: 'funded',
     funding_percentage: 100,
-    merit_partners: [{ name: 'Her Majesty The Queen of Bhutan', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+    merit_partners: [{ name: 'Her Majesty The Gyaltsuen', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+  },
+  13: {
+    status: 'funded',
+    funding_percentage: 100,
+    merit_partners: [{ name: 'Bhutanese in Australia', location: 'Australia', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
   },
   15: {
     status: 'funded',
@@ -76,10 +81,35 @@ const patronMap: Record<number, Pick<Stupa, 'status' | 'funding_percentage' | 'm
     funding_percentage: 100,
     merit_partners: [{ name: 'Wangchuk Dorji', location: 'Bhutan', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
   },
-  88: {
+  44: {
     status: 'funded',
     funding_percentage: 100,
     merit_partners: [{ name: 'Korean Team', location: 'Korea', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+  },
+  88: {
+    status: 'funded',
+    funding_percentage: 100,
+    merit_partners: [{ name: 'Mei Ling', location: 'China', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+  },
+  89: {
+    status: 'funded',
+    funding_percentage: 100,
+    merit_partners: [{ name: 'Mei Ling', location: 'China', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+  },
+  97: {
+    status: 'funded',
+    funding_percentage: 100,
+    merit_partners: [{ name: 'Mei Ling', location: 'China', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+  },
+  98: {
+    status: 'funded',
+    funding_percentage: 100,
+    merit_partners: [{ name: 'Mei Ling', location: 'China', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
+  },
+  99: {
+    status: 'funded',
+    funding_percentage: 100,
+    merit_partners: [{ name: 'Mei Ling', location: 'China', dedication: 'For the benefit of all sentient beings', type: 'lead' }],
   },
   108: {
     status: 'funded',

@@ -1,4 +1,4 @@
-import { CheckCircle2, BarChart3, Users, type LucideIcon } from 'lucide-react';
+import { CheckCircle2, BarChart3, Users, CircleDashed, type LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { Stupa } from '../../types/stupa';
 
@@ -9,6 +9,7 @@ interface SummaryCardsProps {
 
 export default function SummaryCards({ stupas, loading }: SummaryCardsProps) {
   const fullySponsored = stupas.filter((s) => s.status === 'funded').length;
+  const partiallySponsored = stupas.filter((s) => s.status === 'partial').length;
   const totalFunding =
     stupas.length > 0
       ? Math.round(
@@ -23,8 +24,8 @@ export default function SummaryCards({ stupas, loading }: SummaryCardsProps) {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[0, 1, 2].map((i) => (
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        {[0, 1, 2, 3].map((i) => (
           <div key={i} className="border border-burgundy/15 p-6 animate-pulse h-28 bg-burgundy/5" />
         ))}
       </div>
@@ -32,10 +33,11 @@ export default function SummaryCards({ stupas, loading }: SummaryCardsProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <StatCard icon={CheckCircle2} label="Units Fully Sponsored" value={`${fullySponsored} / 108`} delay={0} />
-      <StatCard icon={BarChart3} label="Total Funding Progress" value={`${totalFunding}%`} progress={totalFunding} delay={0.05} />
-      <StatCard icon={Users} label="Total Merit Partners" value={totalPartners.toLocaleString()} delay={0.1} />
+      <StatCard icon={CircleDashed} label="Units Partially Sponsored" value={`${partiallySponsored} / 108`} delay={0.05} />
+      <StatCard icon={BarChart3} label="Total Funding Progress" value={`${totalFunding}%`} progress={totalFunding} delay={0.1} />
+      <StatCard icon={Users} label="Total Merit Partners" value={totalPartners.toLocaleString()} delay={0.15} />
     </div>
   );
 }
